@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Destination - Switzerland Tour</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #fff;
+      background: url('https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg') no-repeat center center/cover;
+      background-attachment: fixed; /* Parallax effect */
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.6); /* Transparent dark overlay */
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header img {
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+    }
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffdf6c;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .card span {
+      font-weight: bold;
+      color: #ffdf6c;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+    }
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #ffdf6c;
+    }
+    form input, form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+    }
+    form input {
+      background: #fff;
+      color: #000;
+    }
+    form button {
+      background: #ffdf6c;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>Dream Destination: Switzerland</h1>
+      <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg" width="500" height="250" alt="Switzerland">
+      <p><strong>Travel to Switzerland without any tension</strong></p>
+    </header>
+
+    <section>
+      <h2>Travel Information</h2>
+      <div class="card">
+        <p><span>Day of Travel:</span> 15th October 2025</p>
+        <p><span>Destination:</span> Zurich, Switzerland</p>
+        <p><span>Tour Duration:</span> 7 Days / 6 Nights</p>
+      </div>
+
+      <h2>Tour Itinerary</h2>
+      <div class="card"><span>Day 1:</span> Arrival in Zurich. Check-in at the hotel and evening welcome dinner.</div>
+      <div class="card"><span>Day 2:</span> Explore Zurich city – Bahnhofstrasse, Lake Zurich, Old Town.</div>
+      <div class="card"><span>Day 3:</span> Scenic train to Interlaken. Stunning views of the Alps.</div>
+      <div class="card"><span>Day 4:</span> Excursion to Jungfraujoch – Top of Europe with glacier views.</div>
+      <div class="card"><span>Day 5:</span> Visit Lucerne – Chapel Bridge, Lion Monument, Lake boat ride.</div>
+      <div class="card"><span>Day 6:</span> Free day for shopping, Swiss cuisine, and relaxation.</div>
+      <div class="card"><span>Day 7:</span> Departure from Zurich with memories for a lifetime.</div>
+
+      <h2>Photo Gallery</h2>
+      <div class="gallery">
+        <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg" alt="Swiss Alps">
+        <img src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg" alt="Lake Lucerne">
+        <img src="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg" alt="Swiss Nature">
+        <img src="https://images.pexels.com/photos/35600/road-sun-rays-path.jpg" alt="Swiss Scenic Road">
+      </div>
+
+      <h2>Book Your Trip</h2>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="date">Preferred Travel Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <button type="submit">Book Now</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Dream Destination Tours | Contact us: info@dreamtours.com</p>
+    </footer>
+  </div>
+</body>
+</html>
