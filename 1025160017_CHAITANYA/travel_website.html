@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Discover Amazing Destinations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea"/><stop offset="100%" style="stop-color:%23764ba2"/></linearGradient></defs><rect width="1200" height="800" fill="url(%23bg)"/><circle cx="200" cy="200" r="100" fill="rgba(255,255,255,0.1)"/><circle cx="800" cy="400" r="150" fill="rgba(255,255,255,0.08)"/><circle cx="1000" cy="150" r="80" fill="rgba(255,255,255,0.12)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.4);
+        }
+
+        /* Destinations Section */
+        .destinations {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            height: 250px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Individual destination images */
+        .destination-card[data-destination="paris"] .card-image {
+            background-image: url('https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=800&h=600&fit=crop');
+        }
+
+        .destination-card[data-destination="tokyo"] .card-image {
+            background-image: url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop');
+        }
+
+        .destination-card[data-destination="bali"] .card-image {
+            background-image: url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=800&h=600&fit=crop');
+        }
+
+        .destination-card[data-destination="newyork"] .card-image {
+            background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&h=600&fit=crop');
+        }
+
+        .destination-card[data-destination="santorini"] .card-image {
+            background-image: url('https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop');
+        }
+
+        .destination-card[data-destination="dubai"] .card-image {
+            background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop');
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            padding: 15px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background: #ff5252;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .destinations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <header>
+        <nav>
+            <a href="#" class="logo">Wanderlust</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#destinations">Destinations</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Explore breathtaking destinations around the world with our curated travel experiences</p>
+            <a href="#destinations" class="cta-button">Start Exploring</a>
+        </div>
+    </section>
+
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Popular Destinations</h2>
+                <p>Handpicked locations that will take your breath away</p>
+            </div>
+            <div class="destinations-grid">
+                <div class="destination-card fade-in" data-destination="paris" onclick="showDestinationDetails('Paris')">
+                    <div class="card-image">
+                        <div class="rating">⭐ 4.8</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Paris, France</h3>
+                        <p class="card-description">The City of Light awaits with its romantic atmosphere, world-class museums, and iconic landmarks.</p>
+                        <div class="card-price">From $1,299</div>
+                    </div>
+                </div>
+
+                <div class="destination-card fade-in" data-destination="tokyo" onclick="showDestinationDetails('Tokyo')">
+                    <div class="card-image">
+                        <div class="rating">⭐ 4.9</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Tokyo, Japan</h3>
+                        <p class="card-description">Experience the perfect blend of ancient traditions and cutting-edge technology in Japan's capital.</p>
+                        <div class="card-price">From $1,599</div>
+                    </div>
+                </div>
+
+                <div class="destination-card fade-in" data-destination="bali" onclick="showDestinationDetails('Bali')">
+                    <div class="card-image">
+                        <div class="rating">⭐ 4.7</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Bali, Indonesia</h3>
+                        <p class="card-description">Tropical paradise with stunning beaches, lush rice terraces, and rich cultural heritage.</p>
+                        <div class="card-price">From $899</div>
+                    </div>
+                </div>
+
+                <div class="destination-card fade-in" data-destination="newyork" onclick="showDestinationDetails('New York')">
+                    <div class="card-image">
+                        <div class="rating">⭐ 4.6</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">New York, USA</h3>
+                        <p class="card-description">The city that never sleeps offers endless entertainment, world-class dining, and iconic skylines.</p>
+                        <div class="card-price">From $1,199</div>
+                    </div>
+                </div>
+
+                <div class="destination-card fade-in" data-destination="santorini" onclick="showDestinationDetails('Santorini')">
+                    <div class="card-image">
+                        <div class="rating">⭐ 4.8</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Santorini, Greece</h3>
+                        <p class="card-description">Whitewashed buildings, breathtaking sunsets, and crystal-clear waters make this island unforgettable.</p>
+                        <div class="card-price">From $1,099</div>
+                    </div>
+                </div>
+
+                <div class="destination-card fade-in" data-destination="dubai" onclick="showDestinationDetails('Dubai')">
+                    <div class="card-image">
+                        <div class="rating">⭐ 4.7</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Dubai, UAE</h3>
+                        <p class="card-description">Modern marvels, luxury shopping, and desert adventures in this futuristic metropolis.</p>
+                        <div class="card-price">From $1,399</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Why Choose Wanderlust?</h2>
+                <p>We make your travel dreams come true with exceptional service</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature fade-in">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Expert Curation</h3>
+                    <p>Our travel experts handpick the most amazing destinations and experiences just for you.</p>
+                </div>
+                <div class="feature fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>We guarantee the best prices with our price-match promise and exclusive deals.</p>
+                </div>
+                <div class="feature fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Personalized Trips</h3>
+                    <p>Every journey is tailored to your preferences, interests, and budget.</p>
+                </div>
+                <div class="feature fade-in">
+                    <div class="feature-icon">📞</div>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is available round the clock to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter" id="contact">
+        <div class="container">
+            <div class="fade-in">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest travel deals and inspiration</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Wanderlust. All rights reserved. Made with ❤️ for travelers.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll indicator
+        function updateScrollIndicator() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        }
+
+        // Fade in animation on scroll
+        function handleScrollAnimation() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        function initSmoothScrolling() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Destination details popup
+        function showDestinationDetails(destination) {
+            const destinations = {
+                'Paris': {
+                    title: 'Paris, France',
+                    description: 'Experience the magic of Paris with visits to the Eiffel Tower, Louvre Museum, and charming Montmartre district.',
+                    highlights: ['Eiffel Tower', 'Louvre Museum', 'Seine River Cruise', 'Versailles Palace']
+                },
+                'Tokyo': {
+                    title: 'Tokyo, Japan',
+                    description: 'Discover Tokyo\'s unique blend of tradition and modernity, from ancient temples to futuristic skyscrapers.',
+                    highlights: ['Shibuya Crossing', 'Tokyo Skytree', 'Senso-ji Temple', 'Tsukiji Fish Market']
+                },
+                'Bali': {
+                    title: 'Bali, Indonesia',
+                    description: 'Relax in tropical paradise with beautiful beaches, ancient temples, and lush landscapes.',
+                    highlights: ['Uluwatu Temple', 'Rice Terraces', 'Beach Clubs', 'Traditional Villages']
+                },
+                'New York': {
+                    title: 'New York, USA',
+                    description: 'Experience the energy of the Big Apple with Broadway shows, world-class museums, and iconic landmarks.',
+                    highlights: ['Statue of Liberty', 'Central Park', 'Broadway Shows', 'Empire State Building']
+                },
+                'Santorini': {
+                    title: 'Santorini, Greece',
+                    description: 'Enjoy breathtaking sunsets, pristine beaches, and charming whitewashed villages.',
+                    highlights: ['Oia Sunset', 'Red Beach', 'Wine Tasting', 'Volcanic Tours']
+                },
+                'Dubai': {
+                    title: 'Dubai, UAE',
+                    description: 'Experience luxury and adventure in this modern desert metropolis.',
+                    highlights: ['Burj Khalifa', 'Desert Safari', 'Dubai Mall', 'Palm Jumeirah']
+                }
+            };
+
+            const dest = destinations[destination];
+            alert(`🌍 ${dest.title}\n\n${dest.description}\n\n✨ Highlights:\n${dest.highlights.map(h => `• ${h}`).join('\n')}`);
+        }
+
+        // Newsletter form submission
+        function initNewsletterForm() {
+            const form = document.getElementById('newsletterForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                
+                // Simulate form submission
+                this.querySelector('.newsletter-button').textContent = 'Subscribing...';
+                
+                setTimeout(() => {
+                    alert(`Thank you for subscribing with ${email}! 🎉\n\nYou'll receive our latest travel deals and inspiration soon.`);
+                    this.reset();
+                    this.querySelector('.newsletter-button').textContent = 'Subscribe';
+                }, 1500);
+            });
+        }
+
+        // Header background change on scroll
+        function initHeaderScroll() {
+            const header = document.querySelector('header');
+            let lastScrollTop = 0;
+
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 100) {
+                    header.style.background = 'rgba(102, 126, 234, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+
+                lastScrollTop = scrollTop;
+            });
+        }
+
+        // Initialize all functionality
+        function init() {
+            initSmoothScrolling();
+            initNewsletterForm();
+            initHeaderScroll();
+            handleScrollAnimation();
+            updateScrollIndicator();
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', function() {
+            updateScrollIndicator();
+            handleScrollAnimation();
+        });
+
+        window.addEventListener('load', function() {
+            handleScrollAnimation();
+        });
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+
+        // Add some interactive hover effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.destination-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                } else {
+                    card.style.transform = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
