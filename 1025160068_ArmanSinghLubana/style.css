@@ -1,0 +1,50 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f0f8ff;
+  color: #333;
+}
+
+header {
+  background: #0077b6;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: #caf0f8;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #00b4d8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0096c7;
+}
+
+#destinations {
+  padding: 20px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  background: #0077b6;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
