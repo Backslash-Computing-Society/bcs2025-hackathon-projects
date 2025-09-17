@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore World - Travel Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Explore<span>World</span></div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="btn">Book Now</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Discover Your Next Adventure</h1>
+      <p>Explore the world’s most beautiful places with us.</p>
+      <div class="search-box">
+        <input type="text" placeholder="Search destinations...">
+        <button onclick="searchDestination()">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinations -->
+  <section id="destinations" class="destinations">
+    <h2>Popular Destinations</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://picsum.photos/id/1018/400/250" alt="Paris">
+        <h3>Paris</h3>
+        <p>The city of love and lights.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/id/1015/400/250" alt="Bali">
+        <h3>Bali</h3>
+        <p>Paradise island with beaches & temples.</p>
+      </div>
+      <div class="card">
+        <img src="https://picsum.photos/id/1016/400/250" alt="New York">
+        <h3>New York</h3>
+        <p>The city that never sleeps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages" class="packages">
+    <h2>Our Travel Packages</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Romantic Escape</h3>
+        <p>5 Nights in Paris with Eiffel Tower view hotel.</p>
+        <button class="btn">Book Now</button>
+      </div>
+      <div class="card">
+        <h3>Tropical Adventure</h3>
+        <p>7 Nights in Bali with island tours & activities.</p>
+        <button class="btn">Book Now</button>
+      </div>
+      <div class="card">
+        <h3>City Explorer</h3>
+        <p>4 Nights in New York with sightseeing passes.</p>
+        <button class="btn">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 ExploreWorld | Designed with ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
